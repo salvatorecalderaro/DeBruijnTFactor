@@ -38,11 +38,6 @@ with st.sidebar:
 st.title("🧬 GraphTFactor")
 st.markdown("**Predict Transcription Factor Presence from Protein Sequences**")
 
-# --- Load Model ---
-@st.cache_resource
-def load_model():
-    return joblib.load(MODEL_PATH)
-
 
 
 
