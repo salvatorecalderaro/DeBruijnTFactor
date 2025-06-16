@@ -6,7 +6,7 @@ from prot2graph import create_graphs
 from GraphTFactor import predict
 
 # --- Constants ---
-LOGO_PATH = "GraphTFactor_logo.png"  # Ensure logo.png is in the same directory # Path to your trained model
+LOGO_PATH = "GraphTFactor_logo.png"  
 
 # --- Page Configuration ---
 st.set_page_config(page_title="GraphTFactor", page_icon=LOGO_PATH)
