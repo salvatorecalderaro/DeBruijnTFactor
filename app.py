@@ -2,13 +2,11 @@ import streamlit as st
 from PIL import Image
 from Bio import SeqIO
 import io
-import numpy as np
-import joblib
 from prot2graph import create_graphs
+from GraphTFactor import predict
 
 # --- Constants ---
-LOGO_PATH = "GraphTFactor_logo.png"  # Ensure logo.png is in the same directory
-MODEL_PATH = "graph_tfactor_model.pkl"  # Path to your trained model
+LOGO_PATH = "GraphTFactor_logo.png"  # Ensure logo.png is in the same directory # Path to your trained model
 
 # --- Page Configuration ---
 st.set_page_config(page_title="GraphTFactor", page_icon=LOGO_PATH)
@@ -58,6 +56,7 @@ elif input_method == "Paste Sequence":
     pasted_seq = st.text_area("Paste your protein sequence here", height=150)
     if pasted_seq:
         sequence = pasted_seq.strip()
+        sequence = ''.join(sequence.split())
 
 
 # --- Predict Button ---
@@ -65,11 +64,24 @@ if sequence:
     if st.button("🔍 Predict Transcription Factor Presence"):
         try:
             graphs = create_graphs(sequence)
-            """
+            prediction = predict(graphs)
             if prediction == 1:
-                st.success("✅ This sequence **contains** a transcription factor.")
+                st.markdown(
+                    """
+                    <div style="padding: 15px; border-radius: 5px; background-color: #d4edda; color: #155724; font-weight: bold; font-size: 18px;">
+                        ✅ This sequence <span style="text-decoration: underline;">contains</span> a transcription factor.
+                    </div>
+                    """, 
+                    unsafe_allow_html=True
+                )
             else:
-                st.warning("❌ This sequence **does not contain** a transcription factor.")
-            """
+                st.markdown(
+                    """
+                    <div style="padding: 15px; border-radius: 5px; background-color: #f8d7da; color: #721c24; font-weight: bold; font-size: 18px;">
+                        ❌ This sequence <span style="text-decoration: underline;">does NOT contain</span> a transcription factor.
+                    </div>
+                    """, 
+                    unsafe_allow_html=True
+                )
         except Exception as e:
             st.error(f"Prediction failed: {e}")

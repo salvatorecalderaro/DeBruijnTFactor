@@ -1,7 +1,6 @@
 import torch
 from torch_geometric.nn.encoding import PositionalEncoding
 import networkx as nx
-from torch_geometric.data import Data
 from torch_geometric.utils import from_networkx
 
 aminoacidi = 'ACDEFGHIKLMNPQRSTVWYX'
@@ -13,10 +12,11 @@ def check_input(sequence):
 
     # Normalize sequence
     sequence = sequence.upper()
-    sequence = sequence.replace(" ", "").replace("\n", "").replace("\r", "")
+    sequence = sequence.replace(" ", " ").replace("\n", "").replace("\r", "")
 
     # Replace non-standard AAs with 'X'
     cleaned_sequence = ''.join([aa if aa in standard_aas else 'X' for aa in sequence])
+    print(cleaned_sequence)
     return cleaned_sequence
 
 

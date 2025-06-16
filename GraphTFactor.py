@@ -8,6 +8,7 @@ from scipy import stats
 import numpy as np
 import os
 
+
 MODELS_PATH = "models"
 EMB_SIZE = 256
 K_SIZES = [3, 5, 7, 9, 11, 13]
@@ -61,9 +62,9 @@ def identify_device():
 def load_models(device):
     models = []
     for k in K_SIZES:
-        model_path = os.path.join(MODELS_PATH, f"model_{k}.pth")
+        model_path = os.path.join(MODELS_PATH, f"model_{k}.pt")
         model = GraphTFactor(EMB_SIZE, HIDDEN_CHANNELS,1, DROPOUT_RATE).to(device)
-        model.load_state_dict(torch.load(model_path))
+        model.load_state_dict(torch.load(model_path,map_location=device))
         if device == torch.device("mps"):
             model = model.to(torch.float32).to(device)
         else:
@@ -79,18 +80,17 @@ def predict(graphs):
     for (graph,model) in zip(graphs,models):
         model.eval()
         with torch.no_grad():
-            if device == torch.device("mps"):
-                graph = graph.to(torch.float32).to(device)
-            else:
-                graph = graph.to(device)
+    
             null_batch = torch.zeros(graph.num_nodes, dtype=torch.long).to(device)
-            proba = model(graph.x, graph.edge_index, null_batch)
+            edge_index = graph.edge_index.to(device)
+            x = graph.x.to(torch.float32 if device.type == "mps" else graph.x.dtype).to(device)
+            proba = model(x, edge_index, null_batch)
             proba = torch.sigmoid(proba)
             pred = torch.round(proba).item()
         preds.append(pred)
     
-    
-    moda_result = stats(np.array(preds))
+
+    moda_result = stats.mode(np.array(preds))
     final_pred = moda_result[0]
     return final_pred
     
