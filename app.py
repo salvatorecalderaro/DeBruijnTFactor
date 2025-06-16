@@ -70,7 +70,6 @@ if sequence:
     if st.button("🔍 Predict Transcription Factor Presence"):
         try:
             graphs = create_graphs(sequence)
-            print(len(graphs))
             """
             if prediction == 1:
                 st.success("✅ This sequence **contains** a transcription factor.")
