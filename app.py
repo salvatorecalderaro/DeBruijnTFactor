@@ -4,6 +4,7 @@ from Bio import SeqIO
 import io
 import numpy as np
 import joblib
+from prot2graph import create_graphs
 
 # --- Constants ---
 LOGO_PATH = "GraphTFactor_logo.png"  # Ensure logo.png is in the same directory
@@ -43,13 +44,8 @@ def load_model():
     return joblib.load(MODEL_PATH)
 
 
-# --- Feature Extraction Function ---
-def extract_features(sequence):
-    amino_acids = 'ACDEFGHIKLMNPQRSTVWY'
-    features = [sequence.count(aa) for aa in amino_acids]
-    return np.array(features).reshape(1, -1)
 
-# --- Input Method ---
+
 input_method = st.radio("Input Method", ["Upload FASTA File", "Paste Sequence"])
 sequence = ""
 
@@ -68,17 +64,18 @@ elif input_method == "Paste Sequence":
     if pasted_seq:
         sequence = pasted_seq.strip()
 
+
 # --- Predict Button ---
 if sequence:
     if st.button("🔍 Predict Transcription Factor Presence"):
         try:
-            features = extract_features(sequence)
-            prediction = model.predict(features)[0]
-            prob = model.predict_proba(features)[0][1] if hasattr(model, "predict_proba") else None
-
+            graphs = create_graphs(sequence)
+            print(len(graphs))
+            """
             if prediction == 1:
                 st.success("✅ This sequence **contains** a transcription factor.")
             else:
                 st.warning("❌ This sequence **does not contain** a transcription factor.")
+            """
         except Exception as e:
             st.error(f"Prediction failed: {e}")
