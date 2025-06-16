@@ -7,7 +7,7 @@ GraphTFactor: a graph-based deep learning tool for protein transcription factor 
 
 ## Try the Streamlit App
 
-👉 [Access GraphTFactor here]()
+👉 [Access GraphTFactor here](https://graphtfactor.streamlit.app)
 
 ---
 
