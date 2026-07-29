@@ -1,4 +1,4 @@
-![GraphTFactor Logo](GraphTFactor_logo.png)
+![DeBruijnTFactor Logo](Glogo.png)
 
 # DeBruijnTFactor
 GraphTFactor: a graph-based deep learning tool for protein transcription factor prediction.

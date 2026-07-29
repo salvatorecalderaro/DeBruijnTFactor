@@ -15,9 +15,9 @@ K_SIZES = [3, 5, 7, 9, 11, 13]
 HIDDEN_CHANNELS = 1024
 DROPOUT_RATE = .3
 
-class GraphTFactor(nn.Module):
+class DeBruijnTFactorr(nn.Module):
     def __init__(self, in_features, hidden_channels, num_classes, dropout_rate=0.5):
-        super(GraphTFactor, self).__init__()
+        super(DeBruijnTFactorr, self).__init__()
         self.conv1 = GCNConv(in_features, hidden_channels)
         self.conv2 = GCNConv(hidden_channels, hidden_channels)
         self.conv3 = GCNConv(hidden_channels, hidden_channels)
@@ -63,7 +63,7 @@ def load_models(device):
     models = []
     for k in K_SIZES:
         model_path = os.path.join(MODELS_PATH, f"model_{k}.pt")
-        model = GraphTFactor(EMB_SIZE, HIDDEN_CHANNELS,1, DROPOUT_RATE).to(device)
+        model = DeBruijnTFactorr(EMB_SIZE, HIDDEN_CHANNELS,1, DROPOUT_RATE).to(device)
         model.load_state_dict(torch.load(model_path,map_location=device))
         if device == torch.device("mps"):
             model = model.to(torch.float32).to(device)

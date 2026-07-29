@@ -3,7 +3,7 @@ from PIL import Image
 from Bio import SeqIO
 import io
 from prot2graph import create_graphs
-from GraphTFactor import predict
+from DeBruijnTFactor import predict
 
 # --- Constants ---
 LOGO_PATH = "GraphTFactor_logo.png"  
