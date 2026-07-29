@@ -1,13 +1,14 @@
 ![DeBruijnTFactor Logo](Glogo.png)
 
 # DeBruijnTFactor
+
 GraphTFactor: a graph-based deep learning tool for protein transcription factor prediction.
 
 ---
 
 ## Try the Streamlit App
 
-👉 [Access DeBruijnTFactor here](https://graphtfactor.streamlit.app)
+👉 [Access DeBruijnTFactor here](https://debruijntfactor.streamlit.app/)
 
 ---
 
