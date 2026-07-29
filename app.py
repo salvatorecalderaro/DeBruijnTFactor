@@ -4,6 +4,8 @@ from Bio import SeqIO
 import io
 from prot2graph import create_graphs
 from DeBruijnTFactor import predict
+import os
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
 
 # --- Constants ---
 LOGO_PATH = "logo.png"  
