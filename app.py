@@ -6,10 +6,10 @@ from prot2graph import create_graphs
 from DeBruijnTFactor import predict
 
 # --- Constants ---
-LOGO_PATH = "GraphTFactor_logo.png"  
+LOGO_PATH = "logo.png"  
 
 # --- Page Configuration ---
-st.set_page_config(page_title="GraphTFactor", page_icon=LOGO_PATH)
+st.set_page_config(page_title="DeBruijnTFactor", page_icon=LOGO_PATH)
 
 # --- Sidebar with Logo and Citation ---
 with st.sidebar:
@@ -33,7 +33,7 @@ with st.sidebar:
     """)
 
 # --- Title ---
-st.title("🧬 GraphTFactor")
+st.title("🧬 DeBruijnTFactor")
 st.markdown("**Predict Transcription Factor Presence from Protein Sequences**")
 
 
