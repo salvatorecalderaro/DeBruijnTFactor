@@ -1,4 +1,4 @@
-![DeBruijnTFactor Logo](Glogo.png)
+![DeBruijnTFactor Logo](logo.png)
 
 # DeBruijnTFactor
 
